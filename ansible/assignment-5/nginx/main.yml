@@ -1,0 +1,6 @@
+---
+# defaults file for nginx
+nginx_signing_key_url: https://nginx.org/keys/nginx_signing.key
+nginx_repo_url: "http://nginx.org/packages/ubuntu"
+nginx_fingerprint: "786BFD6B4D8FBC641080A6ABABF6BD827BD9BF47"
+

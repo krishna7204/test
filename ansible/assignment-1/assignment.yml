@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create NinjaTeam group
+      group: name=NinjaTeam state=present
+
+    - name: Add Nitish to NinjaTeam
+      user: name=Nitish groups=NinjaTeam home=/home/Nitish state=present
+
+    - name: Set permissions for Nitish's home directory
+      file: path=/home/Nitish mode=0755
+
+    - name: Create shared directories in Nitish's home directory
+      file: path=/home/Nitish/{team,ninja} state=directory mode=0770
+
+    - name: Set permissions for team directory
+      file: path=/home/Nitish/team mode=0770 state=directory
+
+    - name: Set permissions for ninja directory
+      file: path=/home/Nitish/ninja mode=0700 state=directory
+
+    - name: Change user shell
+      user: name=Nitish shell=/bin/bash state=present
+
+    - name: Change user password
+      user: name=Nitish password="new_password" state=present
+
+    - name: Delete user
+      user: name=Nitish state=absent
+
+    - name: Delete group
+      group: name=NinjaTeam state=absent
+
+    - name: List users
+      shell: "getent passwd | cut -d: -f1"
+
+    - name: List groups
+      shell: "getent group | cut -d: -f1"
+
